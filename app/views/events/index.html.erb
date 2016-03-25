@@ -1,0 +1,41 @@
+
+
+
+<%= form_for @event, :url => events_path do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<%= f.label :content %>
+	<%= f.text_field :content %>
+	<%= f.submit %>
+<% end %>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>標題</th>
+			<th>內容</th>
+			<th>建立時間</th>
+			<th>操作</th>
+
+
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr><% @events.each do |event| %></tr> 
+		
+		<tr>
+			<th><%= event.title %></th>
+			<th><%= event.content %></th>
+			<th><%= event.created_at %></th>
+			<th>
+			<%= link_to "edit", edit_event_path(event) %>
+			<%= link_to "show", event_path(event) %>
+			<%= link_to "delete", event_path(event), method: :delete %>
+			</th>
+
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+
