@@ -1,22 +1,20 @@
-
-
+<h1>冰與火災情支援網</h1>
+<br>
 <%= form_for @event, :url => events_path do |f| %>
-	<%= f.label :title %>
-	<%= f.text_field :title %>
-	<%= f.label :content %>
-	<%= f.text_field :content %>
-	<%= f.submit %>
+<!-- 不知道:locals => { :f => f }這段的意思 -->
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= f.submit "Create" ,:class =>"btn btn-primary"%>
 <% end %>
 
+<br>
+<h2>災情快訊</h2>
 <table class="table">
 	<thead>
 		<tr>
 			<th>標題</th>
 			<th>內容</th>
 			<th>建立時間</th>
-			<th>操作</th>
-
-
+			<th>快訊操作</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -30,7 +28,7 @@
 			<th>
 			<%= link_to "edit", edit_event_path(event) %>
 			<%= link_to "show", event_path(event) %>
-			<%= link_to "delete", event_path(event), method: :delete %>
+			<%= link_to "delete", event_path(event, :page => params[:page]), method: :delete %>
 			</th>
 
 			<% end %>
@@ -38,3 +36,4 @@
 	</tbody>
 </table>
 
+<%= paginate @events %>

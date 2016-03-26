@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 def index
 	@event = Event.new
 	@events = Event.all
+	@events = Event.page(params[:page]).per(5)
 end
 
 def create
@@ -31,7 +32,7 @@ end
 
 def destroy
 	@event.destroy
-	redirect_to events_path
+	redirect_to events_path(:page => params[:page])
 end
 
 
@@ -42,7 +43,7 @@ end
 
 
 def event_params
-	params.require(:event).permit(:content, :title)
+	params.require(:event).permit(:content, :title,:category_id)
 end
 
 

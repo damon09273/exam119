@@ -1,0 +1,25 @@
+<div class="form_group">
+<%= f.label :title %>
+<%= f.text_field :title,:class =>"form-control" %>
+</div>
+
+<div class="form_group">
+<%= f.label :content %>
+<%= f.text_area :content,:class =>"form-control" %>
+</div>
+
+<div class="form_group">
+<%= f.label :Category_id %>
+<%= f.collection_select(:category_id, Category.all, :id, :name,:class =>"form-control") %>
+</div>
+
+<div class="form_group">
+</div>
+
+<div class="form_group">
+</div>
+
+
+
+
+

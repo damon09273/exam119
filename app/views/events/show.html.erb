@@ -4,28 +4,35 @@
 <th>文章標題：<%= @event.title %></th>	
 </tr>
 
+<tr> 
+<th>文章類別：<%= @event.category.name %></th>
+</tr>
 <tr>
 <th><%= @event.content %></th>	
 </tr>
 
 
 <tr>
-<th>留言內容：<% @comments.each do |comment| %></th> 
+<th>留言內容<% @comments.each do |comment| %></th> 
 
 </tr>
 
 <tr>
 <th><%= comment.body %></th> 
-<th><%= link_to "delete", event_comment_path(comment), method: :delete %></th>
+
 <% end %>
 </tr>
 
 </table>
 
+<div class="form_group">
 <tr>	
 <%= form_for @comment, :url => event_comments_path(@event) do |f| %>
-	<%= f.label :body %>
-	<%= f.text_field :body %>
-	<%= f.submit %>
+	<%= f.label :body,"寫下你的想法" %>
+	<%= f.text_field :body,:class =>"form-control" %>
+	<%= f.submit '送出',:class =>"btn btn-primary" %>
 <% end %>
 </tr>
+</div>
+
+<th> <%= link_to '回首頁' ,events_path%> </th>
