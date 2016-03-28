@@ -16,6 +16,8 @@ def create
 	redirect_to events_path
 end
 
+
+
 def show
 	@comment = Comment.new
 	@comments = @event.comments
