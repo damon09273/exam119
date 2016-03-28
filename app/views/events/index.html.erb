@@ -1,7 +1,7 @@
 <h1>冰與火災情支援網</h1>
 <br>
 <%= form_for @event, :url => events_path do |f| %>
-<!-- 不知道:locals => { :f => f }這段的意思 -->
+<!-- { :f => f } 將f 傳到 partial裡面的:f -->
 <%= render :partial => 'form', :locals => { :f => f } %>
 <%= f.submit "Create" ,:class =>"btn btn-primary"%>
 <% end %>

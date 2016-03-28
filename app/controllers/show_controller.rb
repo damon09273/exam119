@@ -3,6 +3,12 @@
 # 該commend顯示update、destroy選項，
 # 否則只顯示內容
 
-# current.user.id 是如何定義？
+
+# <% if topic.user == current_user %>
+# 	<%= link_to "Delete",....... %>
+# <% end %>	
+
+# current_user.id 是如何定義？
 # 預設會與model中的user.id 相同嗎？
 # 上述解決方案，應該如何程式化？
+

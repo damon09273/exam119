@@ -1,27 +1,28 @@
 class CommentsController < ApplicationController
-	# 如何在噴錯誤中進行值的測試，例如想得知目前current的值
-
-
-	def index
-		
-
-	end
-
+	
+	before_action :authenticate_user!
+  # before_action :set_topic
 
 
 	def create
 		@event = Event.find(params[:event_id])
-		@comment = @event.comments.create(comment_params)
+		@comment = @event.comments.new(comment_params)
 		@comment.user = current_user
-		@comment.save
 
-		redirect_to event_path(@event)
+		if @comment.save
+			redirect_to event_path(@event)
+		else
+			render "topic/show"
+		# @event = Event.find(params[:event_id])
+		end
 	end
 
-def destory
-	@comments.destroy
-	redirect_to event_comment_path
-end
+	def destroy
+		@comment = Comment.find(params[:id])
+		@comment.destroy
+		redirect_to event_path(params[:event_id])
+	end
+
 
 private
 

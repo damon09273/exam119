@@ -15,10 +15,16 @@
 <tr>
 <th>留言內容<% @comments.each do |comment| %></th> 
 
-</tr>
+	</tr>
+2
+	<tr>
+	<th><%= comment.body %></th> 
 
-<tr>
-<th><%= comment.body %></th> 
+
+	<th><% if current_user && (comment.user == current_user) %>
+		<%= link_to "delete", event_comment_path(@event, comment), method: :delete %>
+	<% end %>
+	</th> 
 
 <% end %>
 </tr>
@@ -27,8 +33,6 @@
 
 <div class="form_group">
 <tr>	
-<!-- 在路由表裡，其中的:format等於這邊的(@event嗎？)
-/events/:event_id/comments(.:format) -->
 <%= form_for @comment, :url => event_comments_path(@event) do |f| %>
 	<%= f.label :body,"寫下你的想法" %>
 	<%= f.text_field :body,:class =>"form-control" %>

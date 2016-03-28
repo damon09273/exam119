@@ -1,20 +1,22 @@
 class EventsController < ApplicationController
 
 	before_action :authenticate_user!, :except => [:index]
+	before_action :set_my_topic, :only => [:edit ,:update,:destory]
 	before_action :set_event, only: [:edit, :show, :update, :destroy]
 
-def index
-	@event = Event.new
-	@events = Event.all
-	@events = Event.page(params[:page]).per(5)
-end
+	def index
+		@event = Event.new
+		@events = Event.all
+		@events = Event.page(params[:page]).per(5)
+	end
 
-def create
-	@event = Event.new(event_params)
-	@event.user = current_user
-	@event.save
-	redirect_to events_path
-end
+	def create
+		@event = Event.new(event_params)
+		@event.user = current_user
+		@event.save
+
+		redirect_to events_path
+	end
 
 
 
@@ -24,7 +26,7 @@ def show
 end
 
 def edit
-	
+	@topic = current_user.topics.find(params)
 end
 
 def update
@@ -46,6 +48,11 @@ end
 
 def event_params
 	params.require(:event).permit(:content, :title,:category_id)
+end
+
+
+def set_my_topic
+		@topic = current_user.topics.find(params[:id])
 end
 
 
